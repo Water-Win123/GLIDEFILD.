@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>GLIDEFIND — майнкрафт сервер</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Minecraft', 'Courier New', monospace;
+    }
+
+    body {
+      background: #0b081a;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .site-wrapper {
+      max-width: 1300px;
+      width: 100%;
+      background: radial-gradient(circle at 20% 30%, #1a1230, #0a0718 80%);
+      border-radius: 3rem 3rem 2rem 2rem;
+      padding: 2rem 2rem 3rem;
+      box-shadow: 0 0 30px #7f5ad066, 0 0 60px #4a2b8a55;
+      border: 2px solid #b18aff77;
+      backdrop-filter: blur(2px);
+      transition: all 0.3s ease;
+    }
+
+    /* ГЛАВНЫЙ ЭКРАН */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      padding: 0.5rem 0.5rem 2rem;
+      border-bottom: 2px solid #b18aff55;
+    }
+
+    .hero-center {
+      flex: 1 1 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-center h1 {
+      font-size: clamp(3.5rem, 14vw, 6rem);
+      font-weight: 900;
+      letter-spacing: 6px;
+      background: linear-gradient(135deg, #e9d6ff, #b58aff, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px #a573ff, 0 0 80px #7a47e0;
+      margin-bottom: 0.3rem;
+      animation: titlePulse 3s infinite alternate;
+    }
+
+    @keyframes titlePulse {
+      0% { text-shadow: 0 0 30px #b18aff, 0 0 60px #7a4de0; }
+      100% { text-shadow: 0 0 60px #d5baff, 0 0 100px #a06eff; }
+    }
+
+    .hero-center .slogan {
+      font-size: 1.3rem;
+      color: #d9caff;
+      text-shadow: 0 0 10px #9b6eff66;
+      font-weight: 500;
+      letter-spacing: 3px;
+      background: linear-gradient(90deg, transparent, #b28aff22, transparent);
+      padding: 0.3rem 2rem;
+      border-radius: 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .btn-play {
+      display: inline-block;
+      padding: 0.8rem 3rem;
+      background: #4a7dff;
+      border: none;
+      border-radius: 60px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 15px #4a7dff88;
+      box-shadow: 0 6px 0 #1a3d8a, 0 0 20px #4a7dff55;
+      transition: 0.15s ease;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-play:hover {
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 8px 0 #1a3d8a, 0 0 40px #4a7dff88;
+      background: #5a8dff;
+    }
+
+    .btn-play:active {
+      transform: scale(0.96) translateY(4px);
+      box-shadow: 0 3px 0 #1a3d8a;
+    }
+
+    .btn-youtube {
+      display: inline-block;
+      padding: 0.8rem 3rem;
+      background: #ff3333;
+      border: none;
+      border-radius: 60px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 15px #ff333388;
+      box-shadow: 0 6px 0 #991111, 0 0 20px #ff333355;
+      transition: 0.15s ease;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-youtube:hover {
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 8px 0 #991111, 0 0 40px #ff333388;
+      background: #ff5555;
+    }
+
+    .btn-youtube:active {
+      transform: scale(0.96) translateY(4px);
+      box-shadow: 0 3px 0 #991111;
+    }
+
+    .hero-illustration {
+      flex: 1 1 280px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .donation-block {
+      background: #1f1638dd;
+      backdrop-filter: blur(6px);
+      padding: 1.5rem 2rem;
+      border-radius: 40px 10px 40px 10px;
+      border: 2px solid #b18affaa;
+      box-shadow: 0 0 30px #7c4dff44;
+      text-align: center;
+      min-width: 200px;
+      transition: 0.3s;
+      animation: float 5s infinite alternate;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .donation-block:hover {
+      transform: scale(1.05) translateY(-4px);
+      border-color: #c9adff;
+      box-shadow: 0 0 50px #9f72ff66;
+    }
+
+    .donation-block .donate-link {
+      color: #f0e6ff;
+      font-size: 2rem;
+      font-weight: 700;
+      text-shadow: 0 0 20px #a06eff66;
+      letter-spacing: 3px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .donation-block .donate-link:hover {
+      color: #ffffff;
+      text-shadow: 0 0 40px #c084fc88;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-12px); }
+    }
+
+    /* ПРЕМИУМ БЛОК */
+    .premium-section {
+      margin: 3.5rem 0 2rem;
+      scroll-margin-top: 2rem;
+    }
+
+    .premium-section h2 {
+      font-size: 3.4rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, #d4baff, #a57aff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px #7c4dff55;
+      letter-spacing: 6px;
+      margin-bottom: 3rem;
+    }
+
+    .category-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      color: #f0e6ff;
+      text-shadow: 0 0 20px #a06eff55;
+      letter-spacing: 4px;
+      margin: 2.5rem 0 1.5rem;
+      padding: 0.5rem;
+      border-top: 2px solid #b18aff55;
+      border-bottom: 2px solid #b18aff55;
+      background: linear-gradient(90deg, transparent, #b18aff22, transparent);
+    }
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .premium-card {
+      flex: 1 1 260px;
+      max-width: 330px;
+      background: #1e1538e0;
+      backdrop-filter: blur(8px);
+      border-radius: 40px 10px 40px 10px;
+      padding: 1.8rem 1.5rem 2.2rem;
+      border: 2px solid #b38aff88;
+      box-shadow: 0 8px 30px #3f2a7044;
+      transition: 0.25s ease;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: cardAppear 0.8s ease backwards;
+    }
+
+    .premium-card:nth-child(1) { animation-delay: 0.1s; }
+    .premium-card:nth-child(2) { animation-delay: 0.2s; }
+    .premium-card:nth-child(3) { animation-delay: 0.3s; }
+    .premium-card:nth-child(4) { animation-delay: 0.4s; }
+    .premium-card:nth-child(5) { animation-delay: 0.5s; }
+    .premium-card:nth-child(6) { animation-delay: 0.6s; }
+    .premium-card:nth-child(7) { animation-delay: 0.7s; }
+    .premium-card:nth-child(8) { animation-delay: 0.8s; }
+
+    @keyframes cardAppear {
+      0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .premium-card:hover {
+      transform: scale(1.03) translateY(-10px);
+      border-color: #c9adff;
+      box-shadow: 0 20px 40px #6a42b066, 0 0 40px #9f72ff33;
+      background: #281d47;
+    }
+
+    /* картинки премиум (css-арт) */
+    .premium-icon {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      filter: drop-shadow(0 0 10px #b18aff44);
+    }
+
+    .sword-base {
+      position: relative;
+      width: 80px;
+      height: 100px;
+      background: linear-gradient(135deg, #b3e0ff, #7fc9ff, #4da6e0);
+      clip-path: polygon(40% 0%, 60% 0%, 60% 70%, 75% 70%, 70% 80%, 60% 85%, 60% 100%, 40% 100%, 40% 85%, 30% 80%, 25% 70%, 40% 70%);
+      box-shadow: inset -10px -6px 0 #2d7bb0, 0 0 20px #6bb4ff55;
+      border-radius: 2px;
+      transform: rotate(12deg);
+      z-index: 2;
+    }
+
+    .sword-base::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 18px;
+      background: #8b6b3d;
+      border-radius: 4px 4px 10px 10px;
+      box-shadow: inset -4px -2px 0 #5a3f22;
+    }
+
+    .crown {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-4deg);
+      font-size: 3.8rem;
+      line-height: 1;
+      filter: drop-shadow(0 0 10px #f7d44a55);
+      z-index: 10;
+      color: #f5c542;
+      text-shadow: 0 0 20px #f7b32b55;
+    }
+
+    .crown::before {
+      content: '👑';
+      display: block;
+    }
+
+    .premium-icon .badge-text {
+      position: absolute;
+      bottom: -16px;
+      right: -18px;
+      background: #b31b1b;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 40px 4px 40px 4px;
+      box-shadow: 0 0 20px #ff4f4f55;
+      transform: rotate(6deg);
+      border: 2px solid #ff9090;
+      letter-spacing: 1px;
+      background: #9f1f1f;
+      z-index: 20;
+      text-shadow: 0 0 8px #ffbaba66;
+    }
+
+    /* Сундук для отката инвентаря */
+    .chest-base {
+      position: relative;
+      width: 90px;
+      height: 80px;
+      background: linear-gradient(145deg, #8b6b3d, #6d4f2a);
+      border-radius: 8px;
+      box-shadow: inset -4px -4px 0 #4d351a, 0 0 20px #b18aff33;
+      transform: rotate(2deg);
+      z-index: 2;
+      border: 3px solid #5a3f22;
+    }
+
+    .chest-base::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 18px;
+      background: linear-gradient(145deg, #a8854a, #7a5c30);
+      border-radius: 6px 6px 0 0;
+      border: 3px solid #5a3f22;
+      border-bottom: none;
+      box-shadow: inset 0 4px 0 #c49a5a;
+    }
+
+    .chest-base::after {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 30px;
+      background: #c49a5a;
+      border-radius: 4px;
+      box-shadow: 0 0 10px #f7d44a44;
+      border: 1px solid #5a3f22;
+    }
+
+    .chest-base .chest-lock {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      background: #c49a5a;
+      border-radius: 50%;
+      border: 3px solid #5a3f22;
+      box-shadow: inset 0 0 0 3px #8b6b3d, 0 0 15px #f7d44a44;
+    }
+
+    .chest-base .chest-lock::after {
+      content: '✦';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1rem;
+      color: #5a3f22;
+    }
+
+    .premium-icon .badge-chest {
+      position: absolute;
+      bottom: -16px;
+      right: -8px;
+      background: #b31b1b;
+      color: white;
+      font-weight: 800;
+      font-size: 1.0rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 40px 4px 40px 4px;
+      box-shadow: 0 0 20px #ff4f4f55;
+      transform: rotate(6deg);
+      border: 2px solid #ff9090;
+      letter-spacing: 0.5px;
+      background: #9f1f1f;
+      z-index: 20;
+      text-shadow: 0 0 8px #ffbaba66;
+      white-space: nowrap;
+    }
+
+    /* Микрофон для размута (точная копия референса) */
+    .mic-exact {
+      position: relative;
+      width: 80px;
+      height: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .mic-exact .mic-ball {
+      width: 52px;
+      height: 52px;
+      background: radial-gradient(circle at 40% 35%, #8a8a8a, #4a4a4a 60%, #2a2a2a);
+      border-radius: 50%;
+      border: 3px solid #3a3a3a;
+      box-shadow: inset -6px -6px 10px #2a2a2a, inset 6px 6px 10px #6a6a6a, 0 0 30px #66666633;
+      position: relative;
+    }
+
+    .mic-exact .mic-ball::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 14px;
+      background: linear-gradient(145deg, #5a5a5a, #3a3a3a);
+      border-radius: 0 0 4px 4px;
+      border: 3px solid #3a3a3a;
+      border-top: none;
+    }
+
+    .mic-exact .mic-stick {
+      width: 8px;
+      height: 22px;
+      background: linear-gradient(145deg, #5a5a5a, #3a3a3a);
+      border-radius: 0 0 4px 4px;
+      border: 2px solid #3a3a3a;
+      border-top: none;
+      margin-top: -2px;
+    }
+
+    .mic-exact .mic-base {
+      width: 34px;
+      height: 6px;
+      background: linear-gradient(145deg, #5a5a5a, #3a3a3a);
+      border-radius: 4px;
+      border: 2px solid #3a3a3a;
+      margin-top: -1px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .mic-exact .mic-line {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-18deg);
+      width: 72px;
+      height: 4px;
+      background: #ff2222;
+      border-radius: 2px;
+      z-index: 10;
+      box-shadow: 0 0 25px #ff222288, 0 0 50px #ff222244;
+    }
+
+    /* Разбан иконка */
+    .unban-base {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(145deg, #4a7dff, #2a5ddf);
+      border-radius: 50%;
+      box-shadow: inset -6px -6px 0 #1a3d8a, 0 0 30px #4a7dff44;
+      z-index: 2;
+      border: 3px solid #3a6def;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .unban-base .unban-icon {
+      font-size: 3.5rem;
+      color: #fff;
+      text-shadow: 0 0 20px #ffffff66;
+      line-height: 1;
+    }
+
+    .unban-base .unban-check {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      font-size: 2rem;
+      color: #4aff4a;
+      text-shadow: 0 0 20px #4aff4a66;
+      filter: drop-shadow(0 0 10px #4aff4a44);
+    }
+
+    /* Билет для проходки */
+    .ticket-base {
+      position: relative;
+      width: 90px;
+      height: 110px;
+      background: linear-gradient(145deg, #f5e6c8, #d4c4a0);
+      border-radius: 8px;
+      border: 3px solid #b8a07a;
+      box-shadow: inset -4px -4px 0 #b8a07a, 0 0 30px #b18aff33;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+    }
+
+    .ticket-base::before {
+      content: '✦';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: #b8a07a;
+    }
+
+    .ticket-base::after {
+      content: 'ВХОД';
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #8a7a5a;
+      letter-spacing: 3px;
+    }
+
+    .ticket-base .ticket-stub {
+      width: 60px;
+      height: 50px;
+      background: linear-gradient(145deg, #e8d5b8, #d4c0a0);
+      border-radius: 4px;
+      border: 2px dashed #b8a07a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #8a7a5a;
+    }
+
+    .ticket-base .ticket-stub::before {
+      content: '🎫';
+      font-size: 2.2rem;
+      filter: drop-shadow(0 0 10px #b8a07a55);
+    }
+
+    .premium-icon .badge-ticket {
+      position: absolute;
+      bottom: -16px;
+      right: -8px;
+      background: #b31b1b;
+      color: white;
+      font-weight: 800;
+      font-size: 1.0rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 40px 4px 40px 4px;
+      box-shadow: 0 0 20px #ff4f4f55;
+      transform: rotate(6deg);
+      border: 2px solid #ff9090;
+      letter-spacing: 0.5px;
+      background: #9f1f1f;
+      z-index: 20;
+      text-shadow: 0 0 8px #ffbaba66;
+      white-space: nowrap;
+    }
+
+    /* Иконка для пожертвований */
+    .donate-icon {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(145deg, #ffd700, #f0c000);
+      border-radius: 50%;
+      border: 3px solid #d4a800;
+      box-shadow: inset -6px -6px 0 #c49a00, 0 0 30px #ffd70044;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .donate-icon::after {
+      content: '❤️';
+      filter: drop-shadow(0 0 20px #ff444466);
+    }
+
+    .premium-icon .badge-donate {
+      position: absolute;
+      bottom: -16px;
+      right: -8px;
+      background: #b31b1b;
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 40px 4px 40px 4px;
+      box-shadow: 0 0 20px #ff4f4f55;
+      transform: rotate(6deg);
+      border: 2px solid #ff9090;
+      letter-spacing: 0.5px;
+      background: #9f1f1f;
+      z-index: 20;
+      text-shadow: 0 0 8px #ffbaba66;
+      white-space: nowrap;
+    }
+
+    /* Белая табличка для кастомного префикса */
+    .custom-sign {
+      position: relative;
+      width: 110px;
+      height: 70px;
+      background: linear-gradient(145deg, #f0f0f0, #d8d8d8);
+      border-radius: 8px;
+      border: 3px solid #b0b0b0;
+      box-shadow: inset -4px -4px 0 #b0b0b0, 0 0 30px #b18aff33;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(-2deg);
+      padding: 0 6px;
+    }
+
+    .custom-sign::before {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 20px;
+      background: linear-gradient(145deg, #b0b0b0, #8a8a8a);
+      border-radius: 0 0 4px 4px;
+      border: 2px solid #8a8a8a;
+      border-top: none;
+    }
+
+    .custom-sign .custom-text {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #2a2a2a;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-family: 'Arial Black', sans-serif;
+      line-height: 1;
+    }
+
+    .premium-icon .badge-custom {
+      position: absolute;
+      bottom: -16px;
+      right: -8px;
+      background: #b31b1b;
+      color: white;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 40px 4px 40px 4px;
+      box-shadow: 0 0 20px #ff4f4f55;
+      transform: rotate(6deg);
+      border: 2px solid #ff9090;
+      letter-spacing: 0.5px;
+      background: #9f1f1f;
+      z-index: 20;
+      text-shadow: 0 0 8px #ffbaba66;
+      white-space: nowrap;
+    }
+
+    .premium-card .card-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .premium-card h3 {
+      font-size: 2rem;
+      color: #f0e6ff;
+      text-shadow: 0 0 15px #a06eff44;
+      margin: 0.8rem 0 0.25rem;
+    }
+
+    .premium-card p {
+      color: #cdbfff;
+      font-size: 1rem;
+      margin: 0.4rem 0 0.8rem;
+      min-height: 3rem;
+      background: #2f1f52;
+      padding: 0.4rem 0.6rem;
+      border-radius: 40px;
+      width: 100%;
+    }
+
+    .price-tag {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #fadf8a;
+      text-shadow: 0 0 20px #f5b34244;
+      margin: 0.3rem 0 0.8rem;
+    }
+
+    .price-tag small {
+      font-size: 1.3rem;
+      color: #d2b5ff;
+      font-weight: 400;
+    }
+
+    .btn-buy {
+      background: #733ddf;
+      border: none;
+      padding: 0.9rem 2.8rem;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #fff;
+      box-shadow: 0 6px 0 #3b1f6b, 0 0 20px #8b5cf655;
+      transition: 0.1s ease;
+      cursor: pointer;
+      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: auto;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-buy:hover {
+      background: #8f5aff;
+      transform: scale(1.02);
+      box-shadow: 0 8px 0 #3b1f6b, 0 0 40px #b28aff66;
+    }
+
+    .btn-buy:active {
+      transform: translateY(5px);
+      box-shadow: 0 2px 0 #3b1f6b;
+    }
+
+    /* финал */
+    .final-section {
+      margin-top: 4.5rem;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: #1b1233bb;
+      backdrop-filter: blur(4px);
+      border-radius: 80px 10px 80px 10px;
+      border: 2px solid #a57aff77;
+      animation: finalGlow 4s infinite alternate;
+    }
+
+    @keyframes finalGlow {
+      0% { box-shadow: 0 0 15px #6c42b055; }
+      100% { box-shadow: 0 0 50px #b18aff66; }
+    }
+
+    .final-section h2 {
+      font-size: 2.6rem;
+      color: #f2e8ff;
+      text-shadow: 0 0 30px #ac84ff55;
+    }
+
+    /* адаптив */
+    @media (max-width: 700px) {
+      .site-wrapper { padding: 1.5rem; }
+      .hero { flex-direction: column; text-align: center; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .premium-card { flex: 1 1 100%; max-width: 380px; }
+      .donation-block { width: 100%; }
+      .btn-play, .btn-youtube { width: 100%; max-width: 280px; }
+    }
+  </style>
+</head>
+<body>
+<div class="site-wrapper">
+  <!-- ГЛАВНЫЙ ЭКРАН -->
+  <header class="hero">
+    <div class="hero-center">
+      <h1>GLIDEFIND</h1>
+      <div class="slogan">✦ небесный грид · донат-премиум ✦</div>
+      <div class="hero-buttons">
+        <a href="https://discord.gg/ENjyMhEpc" target="_blank" class="btn-play">▶ Играть</a>
+        <a href="https://www.youtube.com/@md1eath" target="_blank" class="btn-youtube">▶ YouTube</a>
+      </div>
+    </div>
+    <div class="hero-illustration">
+      <div class="donation-block" id="scrollToDonate">
+        <span class="donate-link">К ДОНАТАМ</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ПРЕМИУМ -->
+  <section class="premium-section" id="premiumSection">
+    <h2>▼ ПРЕМИУМ ▼</h2>
+    
+    <!-- Категория: Услуги админов -->
+    <div class="category-title">✦ Услуги админов ✦</div>
+    <div class="card-grid">
+      <!-- Откат инвентаря -->
+      <div class="premium-card">
+        <div class="premium-icon">
+          <div class="chest-base">
+            <div class="chest-lock"></div>
+          </div>
+          <span class="badge-chest">ОТКАТ ИНВЕНТАРЯ</span>
+        </div>
+        <div class="card-content">
+          <h3>Откат инвентаря</h3>
+          <p>Откатывает инвентарь</p>
+          <div class="price-tag">49 <small>₽</small></div>
+          <button class="btn-buy" onclick="alert('Откат инвентаря — 49₽')">Купить</button>
+        </div>
+      </div>
+
+      <!-- Размут -->
+      <div class="premium-card">
+        <div class="premium-icon">
+          <div class="mic-exact">
+            <div class="mic-ball"></div>
+            <div class="mic-stick"></div>
+            <div class="mic-base"></div>
+            <div class="mic-line"></div>
+          </div>
+          <span class="badge-chest">РАЗМУТ</span>
+        </div>
+        <div class="card-content">
+          <h3>Размут</h3>
+          <p>Размутит вас</p>
+          <div class="price-tag">39 <small>₽</small></div>
+          <button class="btn-buy" onclick="alert('Размут — 39₽')">Купить</button>
+        </div>
+      </div>
+
+      <!-- Разбан -->
+      <div class="premium-card">
+        <div class="premium-icon">
+          <div class="unban-base">
+            <span class="unban-icon">🔓</span>
+            <span class="unban-check">✅</span>
+          </div>
+          <span class="badge-chest">РАЗБАН</span>
+        </div>
+        <div class="card-content">
+          <h3>Разбан</h3>
+          <p>Разбанит вас</p>
+          <div class="price-tag">200 <small>₽</small></div>
+          <button class="btn-buy" onclick="alert('Разбан — 200₽')">Купить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Категория: Проходка -->
+    <div class="category-title">✦ Проходка ✦</div>
+    <div class="card-grid">
+      <!-- Проходка -->
+      <div class="premium-card">
+        <div class="premium-icon">
+          <div class="ticket-base">
+            <div class="ticket-stub"></div>
+          </div>
+          <span class="badge-ticket">ПРОХОДКА</span>
+        </div>
+        <div class="card-content">
+          <h3>Проходка</h3>
+          <p>Даёт доступ к серверу без заявки</p>
+          <div class="price-tag">100 <small>₽</small></div>
+          <button class="btn-buy" onclick="alert('Проходка — 100₽')">Купить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Категория: Кастомизация -->
+    <div class="category-title">✦ Кастомизация ✦</div>
+    <div class="card-grid">
+      <!-- Кастомный префикс -->
+      <div class="premium-card">
+        <div class="premium-icon">
+          <div class="custom-sign">
+            <span class="custom-text">CUSTOM</span>
+          </div>
+          <span class="badge-custom">КАСТОМНЫЙ ПРЕФИКС</span>
+        </div>
+        <div class="card-content">
+          <h3>Кастомный префикс</h3>
+          <p>Вы можете создать свой уникальный префикс на сервер</p>
+          <div class="price-tag">99 <small>₽</small></div>
+          <button class="btn-buy" onclick="alert('Кастомный префикс — 99₽')">Купить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Категория: Премиум -->
+    <div class="category-title">✦ Премиум ✦</div>
+    <div class="card-grid">
+      <!-- 1 версия: месяц -->
+      <div class="premium-card">
+        <div class="premium-icon">
+          <div class="sword-base"></div>
+          <div class="crown"></div>
+          <span class="badge-text">НА МЕСЯЦ</span>
+        </div>
+        <div class="card-content">
+          <h3>Премиум на месяц</h3>
+          <p>Выдаёт донат Премиум на 1 месяц</p>
+          <div class="price-tag">99 <small>₽</small></div>
+          <button class="btn-buy" onclick="alert('Премиум на месяц — 99₽')">Купить</button>
+        </div>
+      </div>
+
+      <!-- 2 версия: сезон -->
+      <div class="premium-card">
+        <div class="premium-icon">
+          <div class="sword-base"></div>
+          <div class="crown"></div>
+          <span class="badge-text">НА СЕЗОН</span>
+        </div>
+        <div class="card-content">
+          <h3>Премиум на сезон</h3>
+          <p>Выдаёт донат Премиум на 1 сезон</p>
+          <div class="price-tag">199 <small>₽</small></div>
+          <button class="btn-buy" onclick="alert('Премиум на сезон — 199₽')">Купить</button>
+        </div>
+      </div>
+
+      <!-- 3 версия: навсегда -->
+      <div class="premium-card">
+        <div class="premium-icon">
+          <div class="sword-base"></div>
+          <div class="crown"></div>
+          <span class="badge-text">НАВСЕГДА</span>
+        </div>
+        <div class="card-content">
+          <h3>Премиум навсегда</h3>
+          <p>Выдаёт донат Премиум навсегда</p>
+          <div class="price-tag">299 <small>₽</small></div>
+          <button class="btn-buy" onclick="alert('Премиум навсегда — 299₽')">Купить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Категория: Пожертвования -->
+    <div class="category-title">✦ Пожертвования ✦</div>
+    <div class="card-grid">
+      <!-- Пожертвование создателю -->
+      <div class="premium-card">
+        <div class="premium-icon">
+          <div class="donate-icon"></div>
+          <span class="badge-donate">ПОЖЕРТВОВАНИЕ</span>
+        </div>
+        <div class="card-content">
+          <h3>Пожертвование создателю сайта</h3>
+          <p>Пожертвование создателю сайта</p>
+          <div class="price-tag">❤️ <small>сколько не жаль</small></div>
+          <a href="https://dalink.to/water_win123" target="_blank" class="btn-buy" style="display: inline-block; text-decoration: none; text-align: center;">Пожертвовать</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФИНАЛ -->
+  <div class="final-section">
+    <h2>⚡ стань легендой на GLIDEFIND ⚡</h2>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // анимация появления карточек
+    document.querySelectorAll('.premium-card').forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'scale(0.8) translateY(30px)';
+      setTimeout(() => {
+        card.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+        card.style.opacity = '1';
+        card.style.transform = 'scale(1) translateY(0)';
+      }, 150 + i * 150);
+    });
+
+    // эффект нажатия для кнопок покупки (только для button, не для ссылок)
+    document.querySelectorAll('.btn-buy:not(a)').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        this.style.transform = 'scale(0.96)';
+        setTimeout(() => { this.style.transform = ''; }, 120);
+      });
+    });
+
+    // скролл к донатам
+    const scrollBtn = document.getElementById('scrollToDonate');
+    const premiumSection = document.getElementById('premiumSection');
+    
+    if (scrollBtn && premiumSection) {
+      scrollBtn.addEventListener('click', function(e) {
+        premiumSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    }
+  })();
+</script>
+</body>
+</html>
